@@ -4,7 +4,7 @@ chapter = false
 weight = 10
 +++
 
-The Quick Start catalog has **120+** Quick Starts. It includes a [VPC Quick Start](https://aws.amazon.com/quickstart/architecture/vpc/) which builds a virtual private network (VPC) environment with public and private subnets, following AWS best practices. There is also a [Linux bastion Quick Start](https://aws.amazon.com/quickstart/architecture/linux-bastion/), which creates a multi-AZ linux bastion environment.
+The Quick Start catalog has **160+** Quick Starts. It includes a [VPC Quick Start](https://aws.amazon.com/quickstart/architecture/vpc/) which builds a virtual private network (VPC) environment with public and private subnets, following AWS best practices. There is also a [Linux bastion Quick Start](https://aws.amazon.com/quickstart/architecture/linux-bastion/), which creates a multi-AZ linux bastion environment.
 
 You will use the VPC Quick Start and Linux bastion Quick Start to create VPC and linux bastion environment in your workshop Quick Start. By using these Quick Starts, you get the following benefits:
 
