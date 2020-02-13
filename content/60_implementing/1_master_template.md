@@ -17,9 +17,9 @@ Each Quick Start should allow users to deploy the workload into an existing VPC 
 ### Modularity
 
 To cover both the above scenarios, we will structure our templates in a modular fashion, as shown below.
-![master-template](/images/master-template.png?width=40%&height=40%)
+![master-template](/images/master-template.png?width=60%&height=60%)
 
-**master.template** is the entry point to deploy the Quick Start into a new VPC. It creates a VPC, a Linux bastion, and the workload, as nested stacks.
+**master.template** is the entry point to deploy the Quick Start into a new VPC. It creates a VPC, and the workload, as nested stacks.
 
 **workload.template** is the entry point to deploy the workload into an existing VPC.
 
@@ -30,7 +30,7 @@ Let's create the master templete now.
 
 Master template will create one or many nested stacks, depending upon the Quick Start architecture. 
 
-For this workshop's Quick Start architecture, master template will create three nested stacks - VPC stack, Linux bastion stack and a workload stack, as shown in the image above.
+For this workshop's Quick Start architecture, master template will create three nested stacks - VPC stack, and a workload stack, as shown in the image above.
 
 Create the master template by creating a file called `master.template.yaml` in **templates/** directory, copy the below contents into the file, and save.
 

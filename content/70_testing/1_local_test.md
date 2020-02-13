@@ -120,7 +120,6 @@ tests:
       AvailabilityZones: "$[taskcat_getaz_2]"
       EmailAddress: email@yourdomain.com
       KeyPairName: YOUR-KEYPAIR-HERE
-      RemoteAccessCIDR: "0.0.0.0/0"
       WebserverCIDR: "0.0.0.0/0"
       QSS3KeyPrefix: "qs-workshop/"
       QSS3BucketName: "$[taskcat_autobucket]"
