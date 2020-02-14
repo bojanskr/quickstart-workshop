@@ -24,7 +24,7 @@ We will add a submodule to the **qs-workshop** repo - QuickStart VPC.
 ### Add a VPC to your project
 Change directory to the root of your repo.
 
-`cd qs-workshop`
+Make sure you are in *qs-workshop* folder.
 
 Add QuickStart VPC as a submodule.
 
@@ -62,8 +62,11 @@ Your project directory **qs-workshop** should look like below.
     │       └── templates
     │           └── aws-vpc.template
     │  
-    └── templates
-        └── master.template.yaml
+    ├── templates
+    │   └── master.template.yaml
+    │   └── workshop.template.yaml
+    ├── .gitmodules
+    └── .taskcat.yml
 </pre>
 
 Once you have verified that your project structure is correct, its time to push the changes to the develop branch.

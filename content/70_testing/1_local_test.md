@@ -24,7 +24,7 @@ Run `python --version`, and you should see the output as below:
 
 <pre>
 (vpy36) Admin:~/environment $ python --version
-Python 3.6.8
+Python 3.6.x
 </pre>
 
 ### Install TaskCat
@@ -74,9 +74,9 @@ _tests_ section is where you define the test related configuration for your proj
 
 - **default/template** - path to the template file which needs to be tested, relative to the project config file path.
 
-For the workshop, we have pre-created the .taskcat.yml. Open the file to evaluate its contents. It should look like following:
+For the workshop, open the **qs-workshop/.taskcat.yml** file and copy-paste the following contents in it, and save.
 
-<pre>
+```
 project:
   name: qs-workshop
   regions:
@@ -87,7 +87,9 @@ project:
 tests:
   default:
     template: ./templates/master.template.yaml
-</pre>
+    regions:
+    - us-west-1
+```
 
 {{% notice tip %}}
 TaskCat has several configuration files which can be used to set behaviors in a flexible way and you can read the details in the [TaskCat documentation](https://aws-quickstart.github.io/taskcat/)
@@ -100,6 +102,7 @@ When testing your CloudFormation templates, you need to pass parameter values to
 As you can see in the _qs-workshop/.taskcat.yml_ file, there are no parameter values defined. To specify the parameter values, close the .taskcat.yml file and run the following command.
 
 ```
+cd ~/environment/qs-workshop/
 curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/master/implementing/.taskcat.yml >>.taskcat.yml
 ```
 
@@ -116,6 +119,8 @@ project:
 tests:
   default:
     template: ./templates/master.template.yaml
+    regions:
+    - us-west-1
     parameters:
       AvailabilityZones: "$[taskcat_getaz_2]"
       EmailAddress: email@yourdomain.com

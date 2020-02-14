@@ -23,7 +23,6 @@ Here's the architecture of what we will build:
 This architecture contains following components:
 
 - A virtual private cloud (VPC) that spans two Availability Zones, configured with two public and two private subnets.
-- In a public subnet, a bastion host to provide Secure Shell (SSH) access to the web servers. The bastion host is maintained by an Auto Scaling group that spans multiple Availability Zones, and is configured to ensure there is always one bastion host available.
 - AWS-managed network address translation (NAT) gateways deployed into the public subnets and configured with an Elastic IP address for outbound internet connectivity. The NAT gateways are used for internet access for all EC2 instances launched within the private network.
 - Amazon EC2 web server instances launched in the private subnets, with auto-scaling group enabled to automatically increase capacity if there is a demand spike, and to reduce capacity during low traffic times.
 - Elastic Load Balancing deployed to automatically distribute traffic across the multiple web server instances.
