@@ -35,5 +35,4 @@ and **lower work area**, and opening a new **terminal** tab in the main work are
 Your workspace should now look like this:
 ![c9after](/images/c9after.png)
 
-If you like this theme, you can choose it yourself by selecting **View / Themes / Solarized / Solarized Dark**
-in the Cloud9 workspace menu.
+If you like this theme, you can choose it yourself by selecting **View / Themes / Solarized / Solarized Dark** in the Cloud9 workspace menu.

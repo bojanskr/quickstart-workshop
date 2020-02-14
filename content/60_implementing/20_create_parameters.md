@@ -20,7 +20,7 @@ Follow the below Quick Start parameter guidelines when creating parameters for y
 
 ### Identify parameters
 
-Let's identify the parameters which needs to be passed to the **VPC Quick Start** and **Linux bastion Quick Start**, from the master template. 
+Let's identify the parameters which needs to be passed to the **VPC Quick Start** from the master template. 
 
 
 #### VPC Quick Start parameters
@@ -40,20 +40,6 @@ For this workshop, following parameters values needs to be passed to the **VPC Q
 |PublicSubnet1CIDR| CIDR block for the public (DMZ) subnet 1 located in Availability Zone 1 |10.0.128.0/20|
 |PublicSubnet2CIDR| CIDR block for the public (DMZ) subnet 2 located in Availability Zone 2|10.0.144.0/20|
 |VPCCIDR| CIDR block for the VPC|10.0.0.0/16|
-
-#### Linux bastion Quick Start parameters
-
-Open *submodules/quickstart-linux-bastion/linux-bastion.template* file to evaluate the *Linux bastion Quick Start*  parameters.
-
-*Linux Quick Start* provide variety of parameters to customize the properties of Bastion instance, depending upon your user case. 
-
-For this workshop, following parameter values needs to be passed to the **Linux bastion Quick Start** template.
-
-| Parameter Key | Description | Default Value|
-| ------------- | ----------- | ------------ |
-|RemoteAccessCIDR| List of Availability Zones | Requires Input|
-|BastionAMIOS| The Linux distribution for the AMI to be used for the bastion instances| Amazon-Linux-HVM|
-|BastionInstanceType| Amazon EC2 instance type for the bastion instances |t2.micro|
 
 ### Add parameters to the master template
 

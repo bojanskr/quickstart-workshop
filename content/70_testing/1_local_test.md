@@ -6,14 +6,15 @@ weight = 1
 
 At this point, you have all your code built and ready to be tested. We will use TaskCat, an open source tool developed by AWS Quick Start team to simplify and automate the testing of AWS CloudFormation templates. It test the CloudFormation templates by deploying it in multiple AWS Regions simultaneously and generates a report with a pass/fail result for each region. You can customize the tests through a test config file. 
 
-### Install Python 3
+### Create virtual environment
 
-TaskCat requires python3. By default, Cloud9 workspace comes with python 2. Therefore, we will install python 3 in a virtual environment before installing TaskCat.
+It's a best practice to use virtual environment when working with python projects.
 
-Run following commands, to create a virtual environment and install python 3
+TaskCat requires python3. Therefore, we will create a virtual environment with python3 as default interpreter before installing TaskCat.
+
+Run following commands, to create a virtual environment and use python3 as default interpreter for virtual environment.
 
 ```
-unalias python
 cd ~/environment/
 virtualenv -p /usr/bin/python36 vpy36
 source vpy36/bin/activate
@@ -23,7 +24,7 @@ Run `python --version`, and you should see the output as below:
 
 <pre>
 (vpy36) Admin:~/environment $ python --version
-Python 3.6.7
+Python 3.6.x
 </pre>
 
 ### Install TaskCat
@@ -34,169 +35,134 @@ From your terminal, run the following command.
 
 `pip install taskcat`
 
-You should see the following output.
+This will install the latest TaskCat version 9.
 
-![taskcat-install](/images/taskcat-install.gif)
-
-Run `taskcat --version` to check TaskCat version and confirm that TaskCat is installed correctly.
+After the installation is finished, run `taskcat --version` to ensure that TaskCat version 9 is installed correctly.
 
 ### Prepare tests
 
-TaskCat requires two files at **ci/** folder in the project directory, to run the tests. Following are the files:
+TaskCat requires a project configuration file to configure details about the project and define tests.
 
-1. An input parameter file in JSON format
-2. A test configuration file named **taskcat.yml**
+This file is created at **\<PROJECT_ROOT\>/.taskcat.yml**.
 
-#### Input parameter file
-***Input parameter file*** is a JSON file. It contains the test values for the parameters of your CloudFormation template. You can have multiple parameter files to test different deployment scenarios. This file is a list of object, each object contains two keys named - **ParameterKey** and **ParameterValue**. **ParameterKey** specifies the exact name of the parameter in the CloudFormation template and **ParameterValue** specifies the parameter value needs to be passed to the parameter. You can also auto-generate values for some parameter types such as UUIDs, Availability Zones, strings and numbers, at run time by using pre-defined tokens. For the complete list of pre-defined tokens, see the [TaskCat documentation](https://github.com/aws-quickstart/taskcat#more-information-on-taskcat-runtime-injection).
+There are 2 configuration sections in this file as shown below:
 
-For this workshop, we have already created the input parameter file. Open **ci/workshop_input.json**, and replace the *YOUR-KEYPAIR-HERE* with your KeyPairName.
+1. Project configuration (project)
+2. Test configuration (tests)
 
-Your input parameter file looks like below. 
+<pre>
+project:
+  name: my-cfn-project
+  regions:
+  - us-west-2
+  - eu-north-1
+tests:
+  default:
+    template: ./templates/my-template.yaml
+</pre>
 
-```
-[
-    {
-        "ParameterKey": "AvailabilityZones",
-        "ParameterValue": "$[taskcat_getaz_2]"
-    },
-    {
-        "ParameterKey": "EmailAddress",
-        "ParameterValue": "email@yourdomain.com"
-    },
-    {
-        "ParameterKey": "KeyPairName",
-        "ParameterValue": "YOUR-KEYPAIR-HERE"
-    },
-    {
-        "ParameterKey": "RemoteAccessCIDR",
-        "ParameterValue": "0.0.0.0/0"
-    },
-    {
-        "ParameterKey": "WebserverCIDR",
-        "ParameterValue": "0.0.0.0/0"
-    },
-    {
-        "ParameterKey": "QSS3KeyPrefix",
-        "ParameterValue": "qs-workshop/"
-    },
-    {
-        "ParameterKey": "QSS3BucketName",
-        "ParameterValue": "$[taskcat_autobucket]"
-    }
-]
+#### Project configuration
+
+_project_ section contains the project specific configuration. At minimum, it should have following 2 configurations:
+
+- **name** - Name of the project
+- **regions** - List of AWS regions where you want to test your CloudFormation templates
+
+#### Test configuration
+
+_tests_ section is where you define the test related configuration for your project. At minimum, it should have the following:
+
+- **default/template** - path to the template file which needs to be tested, relative to the project config file path.
+
+For the workshop, open the **qs-workshop/.taskcat.yml** file and copy-paste the following contents in it, and save.
 
 ```
+project:
+  name: qs-workshop
+  regions:
+  - ap-southeast-1
+  - us-east-1
+  - us-west-2
+  - eu-central-1
+tests:
+  default:
+    template: ./templates/master.template.yaml
+    regions:
+    - us-west-1
+```
+
+{{% notice tip %}}
+TaskCat has several configuration files which can be used to set behaviors in a flexible way and you can read the details in the [TaskCat documentation](https://aws-quickstart.github.io/taskcat/)
+{{% /notice %}}
+
+#### Add test parameters
+
+When testing your CloudFormation templates, you need to pass parameter values to use for creating a stack. With TaskCat you can pass these parameter values from configuration file, described above. If you don't specify parameter values in the TaskCat configuration file, you should have default values defined in the template itself for all the parameters.
+
+As you can see in the _qs-workshop/.taskcat.yml_ file, there are no parameter values defined. To specify the parameter values, close the .taskcat.yml file and run the following command.
+
+```
+cd ~/environment/qs-workshop/
+curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/master/implementing/.taskcat.yml >>.taskcat.yml
+```
+
+Your _.taskcat.yml_ file should look like below.
+
+<pre>
+project:
+  name: qs-workshop
+  regions:
+  - ap-southeast-1
+  - us-east-1
+  - us-west-2
+  - eu-central-1
+tests:
+  default:
+    template: ./templates/master.template.yaml
+    regions:
+    - us-west-1
+    parameters:
+      AvailabilityZones: "$[taskcat_getaz_2]"
+      EmailAddress: email@yourdomain.com
+      KeyPairName: YOUR-KEYPAIR-HERE
+      WebserverCIDR: "0.0.0.0/0"
+      QSS3KeyPrefix: "qs-workshop/"
+      QSS3BucketName: "$[taskcat_autobucket]"
+</pre>
+
+You need to replace the *YOUR-KEYPAIR-HERE* with your KeyPairName.
+
+As you can notice, there are few parameter values which is in the format **$[taskcat_*]**. These are the identifiers which are used to auto-generate the values at runtime by TaskCat. For the complete list of pre-defined identifiers, see the [TaskCat documentation](https://github.com/aws-quickstart/taskcat#more-information-on-taskcat-runtime-injection).
+
 
 {{%expand "BONUS Section (May be skipped)" %}}
 
-As you can see above, there are few parameters like *KeyPairName* and *EmailAddress* which you may not want to hardcode a value and check it into the github repository. For such situations, TaskCat provide capability to override the parameter values via override files. Following are the two override files supported by TaskCat:
+As you can see above, there are few parameters like *KeyPairName* and *EmailAddress* which you may not want to hardcode a value and check it into the github repository. For such situations, TaskCat provide capability to override the project configuration and parameter values via override files. Following are the two override files supported by TaskCat:
 
-- **Global override file** - Place this in the **.aws** directory within your home directory 
-*~/.aws/taskcat_global_override.json*
-- **Project override file** - Place this in the **ci/** directory within your project directory 
-*<project_name>/ci/taskcat_project_override.json*
+- **Project override file** - Place this in the **\<PROJECT-ROOT\>/** directory  
+*~/\<PROJECT-ROOT\>/.taskcat_overrides.yml*
+- **Global override file** - Place this in the **~/** home directory  
+*~/.taskcat.yml*
 
-TaskCat read parameters in the following order:
+To understand the precedence of values in different configuration files, read the [Taskcat documentation](https://aws-quickstart.github.io/taskcat/#precedence)
 
-1. It will read values from the standard parameter files.
-2. It will replace those with values from the global overrides file, if that file exists.
-3. It will replace those with values from the project overrides file, if that file exists.
-
-For this workshop, create a global override file and add the parameter value for the password. You file should look like below:
+For this workshop, create a project override file and add the parameter values for the Email address and Key pair name. Your file should look like below:
 
 ```
-[
-    {
-        "ParameterKey": "EmailAddress",
-        "ParameterValue": "email@yourdomain.com"
-    },
-    {
-        "ParameterKey": "KeyPairName",
-        "ParameterValue": "your-key-pair-name"
-    }
-]
+EmailAddress: email@yourdomain.com
+KeyPairName: YOUR-KEYPAIR-HERE
 ```
 {{% /expand%}}
 
-#### TaskCat configuration file
-
-The second file required by TaskCat is the configuration file named **taskcat.yml** in the **ci/** folder. 
-
-<pre>
- global:
-  owner: quickstart@amazon.com
-  qsname: quickstart-name
-  regions:
-    - ap-northeast-1
-    - ap-northeast-2
-    - ap-south-1
-    - ap-southeast-1
-    - ap-southeast-2
-    - ca-central-1
-    - eu-central-1
-    - eu-west-1
-    - eu-west-2
-    - sa-east-1
-    - us-east-1
-    - us-east-2
-    - us-west-1
-    - us-west-2
-  reporting: true
-tests:
-  test-scenario1:
-    parameter_input: input.json
-    template_file: master.template
-    regions:
-    - us-east-1
-  test-scenario2:
-    parameter_input: input2.json
-    template_file: master.template
-</pre>
-
-The **taskcat.yml** contains 2 high level mappings - *global* and *tests*. 
-
-**global** mapping defines the global configurations of the project. It contains:
-
-* owner - Project owner's email address
-* qsname - Name of the project. Must be same as the project folder name.
-* regions - All the regions where tests needs to be executed
-* reporting - To generate test report with logs from each test execution
-
-**tests** mapping defines test scenarios which will be executed by TaskCat. You can define multiple test scenarios in *test* mapping, and each test scenario must specify parameter input file name and CloudFormation template file name. Optionally, you can also define regions in which the test needs to be executed. This region list will override the global region list.
-
-For the workshop, we have pre-created the **ci/taskcat.yml**. Open the file to evaluate its contents.It should look like following:
-
-```
-global:
-  owner: owner@amazon.com
-  qsname: qs-workshop
-  regions:
-    - ap-southeast-1
-    - ap-southeast-2
-    - eu-central-1
-    - eu-west-1
-    - us-east-1
-    - us-west-1
-    - us-west-2
-  reporting: true
-tests:
-  lab-master-vpc:
-    parameter_input: input.json 
-    template_file: master.template.yaml
-    regions:
-      - us-west-2
-```
-
 ### Running tests
 
-Now that we have input parameter files and taskcat configuration file created, let's run TaskCat to execute our tests.
+Now that we have taskcat configuration file created, let's run TaskCat to execute our tests.
 
 Run the following command in your terminal window:
 
-`cd ~/environment`
+`cd ~/environment/qs-workshop`
 
-`taskcat -c qs-workshop/ci/taskcat.yml &> screen-logs.txt &`
+`taskcat test run &> screen-logs.txt &`
 
 This will run TaskCat in the background and send logs/errors to *screen-logs.txt* file. TaskCat performs series of actions as part of executing a test, such as template validation, parameter validation, staging content into S3 bucket, and launching CloudFormation stack. It launches the stack creation in all the defined regions, for each test, simultaneously. And regularly polls the CloudFormation stack status to check if the stack creation is finished. How much time TaskCat takes to finish the testing, depends on how many tests you have defined in your TaskCat configuration file and how long each stack creation and deletion takes.
 

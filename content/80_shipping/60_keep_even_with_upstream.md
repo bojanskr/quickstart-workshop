@@ -19,13 +19,13 @@ Fetch branches from remote.
     .... (updates) ....
 </pre>
 
-**The the HEAD of you fork so that it even with your upstream branch**
+Reset the HEAD of you fork so that it is even with your upstream branch.
 
 `git reset --hard upstream/develop`
 
     HEAD is now at a29330a  Commit message of the last commit in upstream/develop
 
-**Force push your local changes to your origin. This will upstream/develop and origin/develop even**
+Force push your local changes to your origin. This will make upstream/develop and origin/develop even.
 
 `git push --force-with-lease origin develop`
 

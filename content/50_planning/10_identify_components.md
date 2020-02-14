@@ -19,7 +19,6 @@ Can you identify different components in the above architecture?
 {{%expand "Click here to see the list of components" %}}
 1. A virtual private cloud (VPC) that spans two Availability Zones, configured with two public and two private subnets. 
 2. AWS-managed network address translation (NAT) gateways deployed into the public subnets and configured with an Elastic IP address for outbound internet connectivity.
-3. In a public subnet, a bastion host to provide Secure Shell (SSH) access to the web servers. The bastion host is maintained by an Auto Scaling group that spans multiple Availability Zones.
-4. Amazon EC2 web server instances launched in the private subnets, with auto-scaling group enabled.
-5. Elastic Load Balancing deployed to automatically distribute traffic across the web server instances.
+3. Amazon EC2 web server instances launched in the private subnets, with auto-scaling group enabled.
+4. Elastic Load Balancing deployed to automatically distribute traffic across the web server instances.
 {{% /expand%}}

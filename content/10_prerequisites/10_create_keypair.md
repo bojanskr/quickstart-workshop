@@ -14,7 +14,7 @@ If you already have an existing EC2 KeyPair, and corresponding private key, you 
 
 Sign-in to your [AWS account](https://console.aws.amazon.com/)
 
-We will be working in the **eu-central-1** EU (Frankfurt) Region for this workshop, therefore, choose **EU (Frankfurt)** from the upper right of the console.
+We will be working in the **us-east-1 (N. Virginia)** Region for this workshop, therefore, choose **US East (N. Virginia)** from the upper right of the console.
 ![select region](/images/select-region.png)
 
 Go to the **EC2** console by searching or choosing it from the list of AWS services.

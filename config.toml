@@ -24,7 +24,9 @@ disableAssetsBusting = false
 disableLanguageSwitchingButton = true
 disableShortcutsTitle=true
 
-
+[markup]
+  defaultMarkdownHandler = "blackfriday"
+  
 # [menu]
 #   [[menu.main]]
 #     identifier = "Prerequisites"

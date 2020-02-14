@@ -10,9 +10,9 @@ Now you will add **Workload** as a nested stack to your Quick Start. After you h
 
 ### Add Workload as a nested stack
 
-Open _templates/master.template.yaml_ in an editor to inspect the contents of the file. You should have only 2 resource - VPCStack and BastionStack.
+Open _templates/master.template.yaml_ in an editor to inspect the contents of the file. You should have only 1 resource - VPCStack.
 
-You will add a resource of Type **‘AWS::CloudFormation::Stack’** to create third nested cloudformation stack.
+You will add a resource of Type **‘AWS::CloudFormation::Stack’** to create second nested cloudformation stack.
 
 Close _templates/master.template.yaml_ file and run the following command to add **Workload Stack** resource.
 
@@ -62,8 +62,6 @@ Open _templates/master.template.yaml_ in an editor and your **Resources** sectio
           Ref: QSS3BucketName
         QSS3KeyPrefix:
           Ref: QSS3KeyPrefix
-        RemoteAccessCIDR:
-          Ref: RemoteAccessCIDR
         WebserverCIDR:
           Ref: WebserverCIDR
         VPCID:
