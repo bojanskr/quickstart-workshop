@@ -128,6 +128,7 @@ tests:
       WebserverCIDR: "0.0.0.0/0"
       QSS3KeyPrefix: "qs-workshop/"
       QSS3BucketName: "$[taskcat_autobucket]"
+      QSS3BucketRegion: "$[taskcat_current_region]"
 </pre>
 
 You need to replace the *YOUR-KEYPAIR-HERE* with your KeyPairName.
