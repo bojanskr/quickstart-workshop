@@ -21,7 +21,7 @@ For this workshop, we have pre-created the workload template which you can downl
 Run the following command to download the workload template.
 
 ```
-curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/master/implementing/templates/workload.template.yaml -o templates/workload.template.yaml
+curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/implementing/templates/workload.template.yaml -o templates/workload.template.yaml
 ```
 
 Open **templates/workload.template.yaml** file in a text editor to inspect the resources being created in the template.

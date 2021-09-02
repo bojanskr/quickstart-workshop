@@ -10,14 +10,14 @@ Now you will add **Workload** as a nested stack to your Quick Start. After you h
 
 ### Add Workload as a nested stack
 
-Open _templates/master.template.yaml_ in an editor to inspect the contents of the file. You should have only 1 resource - VPCStack.
+Open _templates/main.template.yaml_ in an editor to inspect the contents of the file. You should have only 1 resource - VPCStack.
 
 You will add a resource of Type **‘AWS::CloudFormation::Stack’** to create second nested cloudformation stack.
 
-Close _templates/master.template.yaml_ file and run the following command to add **Workload Stack** resource.
+Close _templates/main.template.yaml_ file and run the following command to add **Workload Stack** resource.
 
 ```
-curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/master/implementing/templates/webserver.master.template.yaml >>templates/master.template.yaml
+curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/implementing/templates/webserver.main.template.yaml >>templates/main.template.yaml
 ```
 
 Commit your changes.
@@ -26,7 +26,7 @@ Commit your changes.
 
 ### Inspect Workload Stack Resource
 
-Open _templates/master.template.yaml_ in an editor and your **Resources** sections should have WorkloadStack resource, as shown below.
+Open _templates/main.template.yaml_ in an editor and your **Resources** sections should have WorkloadStack resource, as shown below.
 
 <pre>
 	WorkloadStack:

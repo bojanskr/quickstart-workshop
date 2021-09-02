@@ -10,14 +10,14 @@ At this point you have everything you need to build an **AWS VPC** as a nested s
 
 ### Add QuickStart VPC as a nested stack
 
-Open _templates/master.template.yaml_ in an editor to inspect the contents of the file. Right now the **Resources** section is empty.
+Open _templates/main.template.yaml_ in an editor to inspect the contents of the file. Right now the **Resources** section is empty.
 
 You will add a resource of Type **'AWS::CloudFormation::Stack'** to create a nested cloudformation stack.
 
-Close _templates/master.template.yaml_ file and run the following command to add **VPC Stack** resource.
+Close _templates/main.template.yaml_ file and run the following command to add **VPC Stack** resource.
 
 ```
-curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/master/implementing/templates/vpcstack.master.template.yaml >>templates/master.template.yaml
+curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/implementing/templates/vpcstack.main.template.yaml >>templates/main.template.yaml
 ```
 
 Add and commit your changes.
@@ -28,7 +28,7 @@ Add and commit your changes.
 
 ### Inspect VPC Stack Resource
 
-Open _templates/master.template.yaml_ in an editor and your **Resources** sections should look as shown below.
+Open _templates/main.template.yaml_ in an editor and your **Resources** sections should look as shown below.
 
 <pre>
     Resources:
