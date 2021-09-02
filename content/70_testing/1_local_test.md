@@ -86,7 +86,7 @@ project:
   - eu-central-1
 tests:
   default:
-    template: ./templates/master.template.yaml
+    template: ./templates/main.template.yaml
     regions:
     - us-west-1
 ```
@@ -103,7 +103,7 @@ As you can see in the _qs-workshop/.taskcat.yml_ file, there are no parameter va
 
 ```
 cd ~/environment/qs-workshop/
-curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/master/implementing/.taskcat.yml >>.taskcat.yml
+curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/implementing/.taskcat.yml >>.taskcat.yml
 ```
 
 Your _.taskcat.yml_ file should look like below.
@@ -118,7 +118,7 @@ project:
   - eu-central-1
 tests:
   default:
-    template: ./templates/master.template.yaml
+    template: ./templates/main.template.yaml
     regions:
     - us-west-1
     parameters:
