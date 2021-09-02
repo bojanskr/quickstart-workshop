@@ -6,7 +6,7 @@ weight = 20
 
 The GitHub repository for each Quick Start includes the following folders:
 
-- **ci** - (required) Contains the configuration file and parameter files used for automated testing.
+- **docs** - (optional) Contains the Quick Start deployment guide content.
 - **templates** - (required) Contains the AWS CloudFormation templates for the Quick Start. All templates use the .template file extension.
 - **scripts** - (optional) Contains the scripts and configuration files that are used in the Quick Start; for example, to orchestrate the bootstrap, install or configure an app, or update a host.
 - **functions** - (optional) Contains lambda functions used in the Quick Start.
@@ -67,7 +67,7 @@ To make this task easy, we have pre-created the scaffolding and configurations f
 2. Download and load the content in your repo
 
 	```
-	curl https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/master/workshop-base/base.tar | tar -x
+	curl https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/workshop-base/base.tar | tar -x
 	```
 
 3. Add and Commit your changes
@@ -81,12 +81,12 @@ To make this task easy, we have pre-created the scaffolding and configurations f
 	<pre>
 	[master (root-commit) ab0660b] Load base content
 	 	 3 files changed, 33 insertions(+)
-		 create mode 100644 ci/taskcat.yml
-		 create mode 100644 ci/workshop_input.json
+		 create mode 100644 .taskcat.yml
 		 create mode 100644 templates/workshop.template.yaml
+		 create mode 100644 templates/main.template.yaml
 	</pre>
 
-4. Now that you have your changes committed locally to your repo, we will push these changes to github remote master branch.
+4. Now that you have your changes committed locally to your repo, we will push these changes to github remote main branch.
 
 	`git push`
 	
@@ -100,13 +100,13 @@ To make this task easy, we have pre-created the scaffolding and configurations f
 	Writing objects: 100% (7/7), 753 bytes | 753.00 KiB/s, done.
 	Total 7 (delta 0), reused 0 (delta 0)
 	To github.com:avattathil/qs-workshop.git
-	** [new branch]      master -> master
+	** [new branch]      main -> main
 	</pre>
 
 {{%expand "Click here if your output doesn't match above" %}}
 #### Prompt: Enter github username
 <pre>
-Admin:~/environment/qs-workshop (master) $ git push
+Admin:~/environment/qs-workshop (main) $ git push
 Username for 'https://github.com':
 </pre>
 
@@ -115,7 +115,7 @@ Don't worry if you see the above prompt. It's asking you to enter the github use
 Enter your github username and personal token (for password) to push the changes. Your output should look like following:
 
 <pre>
-Admin:~/environment/qs-workshop (master) $ git push
+Admin:~/environment/qs-workshop (main) $ git push
 Username for 'https://github.com': sshvans
 Password for 'https://sshvans@github.com': 
 Counting objects: 7, done.
@@ -124,21 +124,21 @@ Compressing objects: 100% (6/6), done.
 Writing objects: 100% (7/7), 830 bytes | 830.00 KiB/s, done.
 Total 7 (delta 0), reused 0 (delta 0)
 To https://github.com/sshvans/qs-workshop.git
- * [new branch]      master -> master
+ * [new branch]      main -> main
 </pre>
 {{% /expand%}}
 
 ### Create development branch
 
-When you create a GitHub repository, it only contains **master** branch. 
+When you create a GitHub repository, it only contains **main** branch. 
 
-As a best practice, you should keep the development and release branches separate. We will use **develop** branch for development and **master** branch for releases of the Quick Start. 
+As a best practice, you should keep the development and release branches separate. We will use **develop** branch for development and **main** branch for releases of the Quick Start. 
 
 ![git branches](/images/git-branches.png?height=50%&width=50%)
 
-Currently, we only have _master_ branch in our github repo. So, let's create a _develop_ branch from the _master_ branch.
+Currently, we only have _main_ branch in our github repo. So, let's create a _develop_ branch from the _main_ branch.
 
-1. Create and checkout develop branch from master
+1. Create and checkout develop branch from main
 
 	`git checkout -b develop`
 
