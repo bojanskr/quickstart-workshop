@@ -20,7 +20,7 @@ Follow the below Quick Start parameter guidelines when creating parameters for y
 
 ### Identify parameters
 
-Let's identify the parameters which needs to be passed to the **VPC Quick Start** from the master template. 
+Let's identify the parameters which needs to be passed to the **VPC Quick Start** from the main template. 
 
 
 #### VPC Quick Start parameters
@@ -41,16 +41,16 @@ For this workshop, following parameters values needs to be passed to the **VPC Q
 |PublicSubnet2CIDR| CIDR block for the public (DMZ) subnet 2 located in Availability Zone 2|10.0.144.0/20|
 |VPCCIDR| CIDR block for the VPC|10.0.0.0/16|
 
-### Add parameters to the master template
+### Add parameters to the main template
 
-Let's add parameters to **master.template.yaml** CloudFormation template.
+Let's add parameters to **main.template.yaml** CloudFormation template.
 
 For this workshop, we have pre-created a stub template which has all the parameters listed above.
 
-Run the following command to download the stub template and overwrite **master.template.yaml** file.
+Run the following command to download the stub template and overwrite **main.template.yaml** file.
 
 ```
-curl https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/master/implementing/templates/incomplete.master.template.yaml -o templates/master.template.yaml
+curl https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/implementing/templates/incomplete.main.template.yaml -o templates/main.template.yaml
 ```
 
-Open *master.template.yaml* file in a text editor to see the parameters being added.
+Open *main.template.yaml* file in a text editor to see the parameters being added.

@@ -29,7 +29,7 @@ Make sure you are in *qs-workshop* folder.
 Add QuickStart VPC as a submodule.
 
 ```
-git submodule add -b master https://github.com/aws-quickstart/quickstart-aws-vpc.git submodules/quickstart-aws-vpc
+git submodule add -b main https://github.com/aws-quickstart/quickstart-aws-vpc.git submodules/quickstart-aws-vpc
 ```
 
 By running the above command, you have added the **quickstart-aws-vpc** git repo as a submodule in the **submodules/quickstart-aws-vpc** directory of qs-workshop repo, and the submodule is tracking the master branch of the *quickstart-aws-vpc*.
