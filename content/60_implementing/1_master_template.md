@@ -1,5 +1,5 @@
 +++
-title = "Building master template"
+title = "Building main template"
 chapter = false
 weight = 1
 +++
@@ -17,22 +17,22 @@ Each Quick Start should allow users to deploy the workload into an existing VPC 
 ### Modularity
 
 To cover both the above scenarios, we will structure our templates in a modular fashion, as shown below.
-![master-template](/images/master-template.png?width=60%&height=60%)
+![main-template](/images/main-template.png?width=60%&height=60%)
 
-**master.template** is the entry point to deploy the Quick Start into a new VPC. It creates a VPC, and the workload, as nested stacks.
+**main.template** is the entry point to deploy the Quick Start into a new VPC. It creates a VPC, and the workload, as nested stacks.
 
 **workload.template** is the entry point to deploy the workload into an existing VPC.
 
-To deploy the Quick Start into a new VPC, user will launch **master.template**. And to deploy Quick Start into an already existing VPC, user will launch **workload.template**. Workload template will require VPC information to be passed in as parameters.
+To deploy the Quick Start into a new VPC, user will launch **main.template**. And to deploy Quick Start into an already existing VPC, user will launch **workload.template**. Workload template will require VPC information to be passed in as parameters.
 
-### Build master template
-Let's create the master templete now.
+### Build main template
+Let's create the main templete now.
 
-Master template will create one or many nested stacks, depending upon the Quick Start architecture. 
+Main template will create one or many nested stacks, depending upon the Quick Start architecture. 
 
-For this workshop's Quick Start architecture, master template will create three nested stacks - VPC stack, and a workload stack, as shown in the image above.
+For this workshop's Quick Start architecture, main template will create two nested stacks - VPC stack, and a workload stack, as shown in the image above.
 
-Create the master template by creating a file called `master.template.yaml` in **templates/** directory, copy the below contents into the file, and save.
+Create the main template by creating a file called `main.template.yaml` in **templates/** directory, copy the below contents into the file, and save.
 
 ```
 ---
@@ -57,4 +57,4 @@ Outputs:
   set of outputs
 ```
 
-Right now the **master.template.yaml** is incomplete. It doesn't do much at this point. You will be filling in different sections of the templates as you follow along rest of the workshop.
+Right now the **main.template.yaml** is incomplete. It doesn't do much at this point. You will be filling in different sections of the templates as you follow along rest of the workshop.
