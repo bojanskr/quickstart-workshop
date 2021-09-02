@@ -48,22 +48,17 @@ Similarly, if you are cloning an existing repo that already contains a submodule
 Your project directory **qs-workshop** should look like below.
 
 <pre>
-    ├── ci
-    │   ├── taskcat.yml
-    │   └── workshop_input.json
     ├── submodules
     │   ├── quickstart-aws-vpc
     │       ├── LICENSE.txt
     │       ├── NOTICE.txt
     │       ├── README.md
-    │       ├── ci
-    │       │   ├── (test input files ...)
-    │       │   └── taskcat.yml
-    │       └── templates
-    │           └── aws-vpc.template
-    │  
+    │       ├── templates
+    │       │   └── aws-vpc.template
+    │       └── .taskcat.yml
+    │
     ├── templates
-    │   └── master.template.yaml
+    │   └── main.template.yaml
     │   └── workshop.template.yaml
     ├── .gitmodules
     └── .taskcat.yml
@@ -81,6 +76,6 @@ Run `git push origin develop`
     Writing objects: 100% (8/8), 1.86 KiB | 635.00 KiB/s, done.
     Total 8 (delta 1), reused 0 (delta 0)
     remote: Resolving deltas: 100% (1/1), completed with 1 local object.
-    To github.com:avattathil/qs-workshop.git
+    To github.com:sshvans/qs-workshop.git
        3fe60df..acdba90  develop -> develop
 </pre>
