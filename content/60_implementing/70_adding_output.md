@@ -23,7 +23,7 @@ For this workshop, you will add the following outputs to your main template.
 Run the following command to add outputs to **main.template.yaml** file.
 
 ```
-curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/implementing/templates/outputs.master.template.yaml >>templates/main.template.yaml
+curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/implementing/templates/outputs.main.template.yaml >>templates/main.template.yaml
 ```
 
 Commit your changes.
