@@ -1,7 +1,7 @@
 +++
 title = "Adding outputs"
 chapter = false
-weight = 70
+weight = 30
 +++
 
 **Outputs** section of the CloudFormation template allows us to return any values to the user after the Stack creation is completed successfully. Some examples are IP address of the EC2 instance, VPC Id, S3 bucket name, etc.

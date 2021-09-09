@@ -1,16 +1,10 @@
 +++
-title = "Adding your workload"
+title = "Adding Resources"
 chapter = false
-weight = 50
+weight = 10
 +++
 
-The term **workload** here is used to represent the CloudFormation stack which consists of all the resources that is core to the solution you want to deploy.
-
-In this workshop, **an autoscaled nginx web server deployed across 2 AZs, along with Elastic load balancer (ELB)** is referred as workload, as shown in the image below.
-
-{{< figure src="/images/workload.png" title="Image 1: Workload" >}}
-
-### Create Workload template
+### Add resources to your Workload template
 
 First you will create a CloudFormation template which will create all the necessary AWS resources to deploy the workload, as shown in Image 1.
 
