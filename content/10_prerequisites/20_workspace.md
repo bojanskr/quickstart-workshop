@@ -26,6 +26,8 @@ the cloud9 domain, otherwise connecting to the workspace might be impacted.
 2. Leave all of the environment settings as they are, and go to the **Next step**
 3. Click **Create environment**
 
+It will take approximately 5 minutes to create AWS Cloud9 environment.
+
 ### Clean up the layout
 
 When the environment comes up, customize the layout by closing the **welcome tab**

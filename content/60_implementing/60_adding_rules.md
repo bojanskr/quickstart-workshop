@@ -11,6 +11,7 @@ When passing parameters to the CloudFormation for creating or updating a stack, 
 ### Understanding Rules
 
 A Rule consists of two properties:
+ 
 - Rule condition (optional) - determines when a rule takes effect.
 - Assertion (required) - describes what values users can specify for a particular parameter.
 
@@ -39,7 +40,8 @@ You will add above rule to the workload template to ensure that only a1.large in
 Run the following command to add rule in the **workload.template.yaml** file.
 
 ```
-curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/implementing/templates/rule.workload.template.yaml >>templates/workload.template.yaml
+cd /home/ec2-user/environment
+curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/cfn-workshop/templates/stubs/rules.workload.template.yaml -o templates/workload.template.yaml
 ```
 
-Open _templates/workload.template.yaml_ in an editor to verify the Rules section.
+Open *workload.template.yaml* file in a text editor to see the rules being added.

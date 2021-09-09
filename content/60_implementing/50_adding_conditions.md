@@ -32,7 +32,8 @@ You will add another security group resource to your template which is more rest
 Run the following command to add condition and new Security group in the **workload.template.yaml** file.
 
 ```
-curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/implementing/templates/condition.workload.template.yaml >>templates/workload.template.yaml
+cd /home/ec2-user/environment
+curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/cfn-workshop/templates/stubs/conditions.workload.template.yaml -o templates/workload.template.yaml
 ```
 
-Open _templates/workload.template.yaml_ in an editor to verify the Conditions section.
+Open *workload.template.yaml* file in a text editor to see the conditions being added.

@@ -8,9 +8,9 @@ So far in the workshop, the CloudFormation template you have created deploys all
 
 You may choose to create a VPC and other related resources in the same Workload CloudFormation template. However, as you write other CloudFormation templates in the real world, you will often find that VPC is a common resource which you need to create for variety of different workloads. So, instead of copy and pasting VPC related resources in every workload template, its best to have a separate CloudFormation template for creating netowrking resources such as VPC, Subnets, Network ACLs and any other related resources, and reference that template. Visually, your template structure will look like below.
 
-{{< figure src="/images/main-template.png" title="Image 1: Workload" >}}
+{{< figure src="/images/main-template.png" title="Nested stacks" >}}
 
-You have a `main.template.yaml` file which creates your main stack. This file references two other templates. First is `aws-vpc.template.yaml` file which creates a VPC stack and second is `workload.template.yaml` file which creates the workload stack. VPC stack and Workload stack are called Nested stacks.
+You have a `main.template.yaml` file which creates your main stack. This file references two other templates. First is `aws-vpc.template.yaml` file which creates a VPC stack and second is `workload.template.yaml` file which creates the workload stack. VPC stack and Workload stack are called *Nested stacks*.
 
 ### Using existing template
 
@@ -22,11 +22,19 @@ To use the VPC Quick Start in your workshop, you will use Git Submodules feature
 
 Git Submodules allow you to have a Git repository as a subdirectory of another Git repository. This lets you clone another repository into your project, and keep it in sync with the original repository whenever there are new updates to it.
 
-Change directory to the root of your repo.
+Change directory to the root of your project folder.
 
-Make sure you are in *qs-workshop* folder.
+```
+cd /home/ec2-user/environment
+```
 
-Add QuickStart VPC as a submodule.
+Initialize current directory as a Git repo.
+
+```
+git init
+```
+
+Add VPC Quick Start as a submodule.
 
 ```
 git submodule add -b main https://github.com/aws-quickstart/quickstart-aws-vpc.git submodules/quickstart-aws-vpc
@@ -48,8 +56,7 @@ Your project directory **qs-workshop** should look like below.
     │
     ├── templates
     │   └── workshop.template.yaml
-    ├── .gitmodules
-    └── .taskcat.yml
+    └── .gitmodules
 </pre>
 
 ### Creating main template
@@ -76,26 +83,39 @@ Outputs:
 
 To use VPC and workload templates for creating nested stacks, you will add 2 resources of Type **AWS::CloudFormation::Stack**.
 
-For example, in your `main.template.yaml', you will create a VPC stack as shown below:
+For example, in your _main.template.yaml_ you will create a VPC stack and workload stacks as shown below:
 
 ```yaml
 Resources:
   VPCStack:
-    Type: 'AWS::CloudFormation::Stack'
-    Properties:
-      TemplateURL: !Sub >-
-        https://${QSS3BucketName}.s3.amazonaws.com/${QSS3KeyPrefix}submodules/quickstart-aws-vpc/templates/aws-vpc.template
-      Parameters:
-        AvailabilityZones: !Join
-          - ','
-          - !Ref AvailabilityZones
-        KeyPairName: !Ref KeyPairName
-        NumberOfAZs: '2'
-        PrivateSubnet1ACIDR: !Ref PrivateSubnet1CIDR
-        PrivateSubnet2ACIDR: !Ref PrivateSubnet2CIDR
-        PublicSubnet1CIDR: !Ref PublicSubnet1CIDR
-        PublicSubnet2CIDR: !Ref PublicSubnet2CIDR
-        VPCCIDR: !Ref VPCCIDR
+      Type: 'AWS::CloudFormation::Stack'
+      Properties:
+        TemplateURL:
+          !Sub https://${S3BucketName}.s3.${S3BucketRegion}.${AWS::URLSuffix}/${S3KeyPrefix}submodules/quickstart-aws-vpc/templates/aws-vpc.template
+        Parameters:
+          AvailabilityZones: !Join 
+            - ','
+            - !Ref AvailabilityZones
+          KeyPairName: !Ref KeyPairName
+          NumberOfAZs: '2'
+          PrivateSubnet1ACIDR: !Ref PrivateSubnet1CIDR
+          PrivateSubnet2ACIDR: !Ref PrivateSubnet2CIDR
+          PublicSubnet1CIDR: !Ref PublicSubnet1CIDR
+          PublicSubnet2CIDR: !Ref PublicSubnet2CIDR
+          VPCCIDR: !Ref VPCCIDR
+  WorkloadStack:
+      Type: 'AWS::CloudFormation::Stack'
+      Properties:
+        TemplateURL:
+          !Sub https://${S3BucketName}.s3.${S3BucketRegion}.${AWS::URLSuffix}/${S3KeyPrefix}templates/public.workload.template.yaml
+        Parameters:
+          InstanceType: !Ref InstanceType
+          SSHLocation: !Ref SSHLocation
+          KeyName: !Ref KeyPairName
+          OperatorEMail: !Ref OperatorEMail
+          PublicSubnet1ID: !GetAtt VPCStack.Outputs.PublicSubnet1ID
+          PublicSubnet2ID: !GetAtt VPCStack.Outputs.PublicSubnet2ID
+          VPCID: !GetAtt VPCStack.Outputs.VPCID
 ```
 
 To make it simple for this workshop, we have pre-created a stub that you can copy to your main template.
@@ -103,7 +123,8 @@ To make it simple for this workshop, we have pre-created a stub that you can cop
 Run the following command to copy the pre-created **main.template.yaml** file.
 
 ```
-curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/implementing/templates/main.template.yaml >>templates/main.template.yaml
+cd /home/ec2-user/environment
+curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/cfn-workshop/templates/stubs/main.template.yaml -o templates/main.template.yaml
 ```
 
 Open _templates/main.template.yaml_ in an editor to verify the content.

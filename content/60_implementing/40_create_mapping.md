@@ -14,7 +14,7 @@ You can't include parameters, pseudo parameters, or intrinsic functions in the M
 
 ### Understanding Mappings section
 
-In the workload template, you have a hardcoded AMI value for the WebServer as shown below:
+In the workload template, you have an option to hardcode AMI value for the WebServer as shown below:
 
 ```yaml
 Properties:
@@ -22,50 +22,58 @@ Properties:
       ImageId: 'ami-ad45dr33ddfe3ddf'
 ```
 
-To pass the AMI Id dynamically based on a region where the CloudFormation stack is created, add a AWSAMIRegionMap in the Mappings section and replace the hardcoded AMI Id value with the intrinsic function **Fn::FindInMap**, as shown below:
+However, hardcoding an AMI Id is not a good practice. Instead, you should pass an AMI Id dynamically based on a region where the CloudFormation stack is created.
+
+To do that, add a _AWSRegionArch2AMI_ map in the Mappings section and use the intrinsic function **Fn::FindInMap**, as shown below:
 
 ```yaml
 Mappings:
-  AWSAMIRegionMap:
-    AMI:
-      US1604HVM: ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-20180405
-    ap-northeast-1:
-      US1604HVM: ami-60a4b21c
-    ap-northeast-2:
-      US1604HVM: ami-633d920d
-    ap-south-1:
-      US1604HVM: ami-dba580b4
-    ap-southeast-1:
-      US1604HVM: ami-82c9ecfe
-    ap-southeast-2:
-      US1604HVM: ami-2b12dc49
-    ca-central-1:
-      US1604HVM: ami-9d7afcf9
-    eu-central-1:
-      US1604HVM: ami-cd491726
-    eu-west-1:
-      US1604HVM: ami-74e6b80d
-    eu-west-2:
-      US1604HVM: ami-506e8f37
-    sa-east-1:
-      US1604HVM: ami-5782d43b
-    us-east-1:
-      US1604HVM: ami-6dfe5010
-    us-east-2:
-      US1604HVM: ami-e82a1a8d
-    us-west-1:
-      US1604HVM: ami-493f2f29
-    us-west-2:
-      US1604HVM: ami-ca89eeb2
+  AWSRegionArch2AMI:
+      us-east-1:
+        HVM64: ami-0ff8a91507f77f867
+      us-west-2:
+        HVM64: ami-a0cfeed8
+      us-west-1:
+        HVM64: ami-0bdb828fd58c52235
+      eu-west-1:
+        HVM64: ami-047bb4163c506cd98
+      eu-west-2:
+        HVM64: ami-f976839e
+      eu-west-3:
+        HVM64: ami-0ebc281c20e89ba4b
+      eu-central-1:
+        HVM64: ami-0233214e13e500f77
+      ap-northeast-1:
+        HVM64: ami-06cd52961ce9f0d85
+      ap-northeast-2:
+        HVM64: ami-0a10b2721688ce9d2
+      ap-northeast-3:
+        HVM64: ami-0d98120a9fb693f07
+      ap-southeast-1:
+        HVM64: ami-08569b978cc4dfa10
+      ap-southeast-2:
+        HVM64: ami-09b42976632b27e9b
+      ap-south-1:
+        HVM64: ami-0912f71e06545ad88
+      us-east-2:
+        HVM64: ami-0b59bfac6be064b78
+      ca-central-1:
+        HVM64: ami-0b18956f
+      sa-east-1:
+        HVM64: ami-07b14488da8ea02a0
+      cn-north-1:
+        HVM64: ami-0a4eaf6c4454eda75
+      cn-northwest-1:
+        HVM64: ami-6b6a7d09
 ```
 
 ```yaml
 Properties:
   KeyName: !Ref KeyPairName
   ImageId: !FindInMap 
-    - AWSAMIRegionMap
+    - AWSRegionArch2AMI
     - !Ref 'AWS::Region'
-    - US1604HVM
+    - HVM64
 ```
 
 ### Adding Mappings section
@@ -73,7 +81,8 @@ Properties:
 Run the following command to add Mappings section and update ImageId property to use the mapping, in the **workload.template.yaml** file.
 
 ```
-curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/implementing/templates/mappings.workload.template.yaml >>templates/workload.template.yaml
+cd /home/ec2-user/environment
+curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/cfn-workshop/templates/stubs/mappings.workload.template.yaml -o templates/workload.template.yaml
 ```
 
-Open _templates/workload.template.yaml_ in an editor to verify the Mappings section.
+Open *workload.template.yaml* file in a text editor to see the mappings being added.

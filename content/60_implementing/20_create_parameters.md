@@ -34,7 +34,8 @@ For this workshop, we have identified the following parameters that should be ad
 |PrivateSubnet2ID| Private Subnet Id 2 |Requires Input |
 |PublicSubnet1ID| Public Subnet Id 1 |Requires Input |
 |PublicSubnet2ID| Public Subnet Id 2 |Requires Input |
-|WebserverCIDR| Allowed CIDR block for  webserver access|10.0.0.0/16|
+|SSHLocation| Allowed CIDR block for  webserver SSH access|10.0.0.0/16|
+|OperatorEmail| Email address to send an email for auto-scaling event |Requires Input |
 |VPCID| ID of the VPC |Requires Input |
 
 #### Add parameters to the workload template
@@ -46,7 +47,8 @@ For this workshop, we have pre-created a stub template which has all the paramet
 Run the following command to download the stub template and overwrite **workload.template.yaml** file.
 
 ```
-curl https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/implementing/templates/incomplete.workload.template.yaml -o templates/workload.template.yaml
+cd /home/ec2-user/environment
+curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/cfn-workshop/templates/stubs/parameters.workload.template.yaml -o templates/workload.template.yaml
 ```
 
 Open *workload.template.yaml* file in a text editor to see the parameters being added.
@@ -101,7 +103,8 @@ For this workshop, we have pre-created a stub template which has parameter group
 Run the following command to download the stub template and overwrite **workload.template.yaml** file.
 
 ```
-curl https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/implementing/templates/parameter-groups.workload.template.yaml -o templates/workload.template.yaml
+cd /home/ec2-user/environment
+curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/cfn-workshop/templates/stubs/parametergroups.workload.template.yaml -o templates/workload.template.yaml
 ```
 
 Open *workload.template.yaml* file in a text editor to see the parameter groups and labels being added.

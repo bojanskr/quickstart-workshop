@@ -5,14 +5,14 @@ weight = 1
 +++
 
 {{% notice info %}}
-The following instruction must be performed from within your workshop repo **qs-workshop**
+The following instruction must be performed from within your workshop repo **workshop**
 {{% /notice %}}
 
 ### Workload stack
 
 The term **workload** here is used to represent the CloudFormation stack which consists of all the resources that is core to the solution you want to deploy.
 
-In this workshop, **an autoscaled nginx web server deployed across 2 AZs, along with Elastic load balancer (ELB)** is referred as workload, as shown in the image below.
+In this workshop, **a multi-az auto-scaled Apache web server deployed across 2 AZs, along with Elastic load balancer (ELB)** is referred as workload, as shown in the image below.
 
 {{< figure src="/images/workload.png" title="Image 1: Workload" >}}
 

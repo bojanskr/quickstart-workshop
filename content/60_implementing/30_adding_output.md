@@ -28,23 +28,20 @@ For this workshop, you will add the following output to your workload template t
 ```yaml
 Outputs:
   URL:
-    Description: The URL of WebServer
+    Description: The URL of the website
     Value: !Join 
       - ''
       - - 'http://'
         - !GetAtt 
-          - ApplicationLoadBalancer
+          - ElasticLoadBalancer
           - DNSName
 ```
 
 Run the following command to add outputs to the **workload.template.yaml** file.
 
 ```
-curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/implementing/templates/outputs.workload.template.yaml >>templates/workload.template.yaml
+cd /home/ec2-user/environment
+curl -s https://raw.githubusercontent.com/aws-quickstart/quickstart-workshop-labs/main/cfn-workshop/templates/stubs/outputs.workload.template.yaml -o templates/workload.template.yaml
 ```
 
-Commit your changes.
-
-` git commit -a -m 'Add outputs to main template'`
-
-Open _templates/main.template.yaml_ in an editor and your **Outputs** section should have all the outputs, as mentioned above.
+Open *workload.template.yaml* file in a text editor to see the outputs being added.

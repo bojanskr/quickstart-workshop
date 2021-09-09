@@ -7,13 +7,18 @@ weight = 10
 ### Our Goal
 In this workshop, we will learn:
 
-- Setting-up source control for Quick Start artifacts
-- Setting-up a development environment to build Quick Start
-- Setting-up CICD pipeline to continuously build and test code changes to the Quick Start
-- Designing Quick Start architecture following AWS best practices
-- Writing templates for maintainability, flexibility and re-usability
-- Testing templates in multiple regions with different input parameters using single command
-- Packaging and submitting the Quick Start for review and publishing
+- Anatomy of the CloudFormation template
+- Basics of CloudFormation template:
+    - Creating AWS Resources such as EC2 instances, Elastic Load Balancer, etc.
+    - Making CloudFormation template customizable using Parameters
+    - Providing AWS resource information to users using Outputs
+- Advance concepts of CloudFormation:
+    - Making CloudFormation template dynamic using Mappings
+    - Creating AWS resources when certain condition is True, using Conditions
+    - Avoiding stack failure by validating parameter values, using Rules
+    - Re-using existing templates, via Nested Stacks
+- Testing templates in multiple regions with different input parameters using Taskcat
+- Performing static analysis of the templates
 
 ### Architecture
 Here's the architecture of what we will build:
