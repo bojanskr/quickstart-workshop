@@ -1,7 +1,7 @@
 baseURL = "https://workshop.quickstart.awspartner.com"
 languageCode = "en-us"
 defaultContentLanguage = "en"
-title = "AWS Quick Start Workshop"
+title = "AWS CloudFormation Workshop"
 theme = "learn"
 uglyurls = true
 # googleAnalytics = "UA-136137356-1"
@@ -18,7 +18,7 @@ hrefTargetBlank = true
 themeVariant = "mine"
 showVisitedLinks = false
 author = "Shivansh Singh"
-description = "AWS Quick Start Workshop"
+description = "AWS CloudFormation Workshop"
 disableSearch = false
 disableAssetsBusting = false
 disableLanguageSwitchingButton = true
