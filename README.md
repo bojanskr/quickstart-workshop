@@ -1,5 +1,5 @@
-# AWS Quick Start Workshop
-Learn AWS CloudFormation best practices and building AWS Quick Starts, the right way!
+# AWS CloudFormation Workshop
+Learn AWS CloudFormation best practices from basics to advanced!
 
 ## Generating the workshop static site pages with Hugo
 
