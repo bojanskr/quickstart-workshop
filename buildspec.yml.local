@@ -1,0 +1,43 @@
+
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.7
+    commands:
+      - apt-get update
+      - echo Installing hugo, jq
+      #- sudo apt-get install hugo
+      - curl -L -o hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.40.1/hugo_0.40.1_Linux-64bit.deb
+      - dpkg -i hugo.deb
+      - hugo version
+      - apt-get install jq
+  pre_build:
+    commands:
+      - echo In pre_build phase..
+      - echo Current directory is $CODEBUILD_SRC_DIR
+      - ls -la
+  build:
+    commands:
+      - hugo -v
+  post_build:
+    commands:
+      - echo Publish changes to S3 bucket..
+    #  - aws s3 sync public/ s3://develop.workshop.awsquickstart --delete --region us-east-1
+    ## Update S3 bucket name below with the bucket where the workshop website is hosted from.
+      # - aws s3 sync --acl "public-read" --sse "AES256" public/ s3://cfnworkshop.awsia --delete --region us-east-1
+    #   - echo Assume cross account IAM role
+    #   - temp_role=$(aws sts assume-role --role-arn "arn:aws:iam::213747939285:role/quickstart-workshop-cloudfront-cross-account-role" --role-session-name "Codebuild-InvalidateDist")
+    #   - echo $temp_role
+    #   - export AWS_ACCESS_KEY_ID=$(echo $temp_role | jq -r .Credentials.AccessKeyId)
+    #   - export AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq -r .Credentials.SecretAccessKey)
+    #   - export AWS_SESSION_TOKEN=$(echo $temp_role | jq -r .Credentials.SessionToken)
+    #   - echo $AWS_ACCESS_KEY_ID
+    #   - echo $AWS_SECRET_ACCESS_KEY
+    #   - echo $AWS_SESSION_TOKEN
+    #   - echo Invalidate cloudfront distribution
+    #   - aws cloudfront create-invalidation --distribution-id E3DWVODGWVB3XM --paths '/*'
+artifacts:
+  files:
+    - 'public/**/*'
