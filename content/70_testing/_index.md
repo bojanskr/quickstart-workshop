@@ -1,5 +1,5 @@
 +++
-title = "Testing Quick Start"
+title = "Testing CloudFormation"
 chapter = true
 weight = 70
 +++
